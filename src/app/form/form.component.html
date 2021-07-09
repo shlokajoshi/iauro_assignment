@@ -1,0 +1,49 @@
+<mat-card class="card">
+    <mat-card-title>Form </mat-card-title>
+    <mat-card-content>
+        <div class="form-container">
+            <form [formGroup]="formDetails" (ngSubmit)="submit()">
+                <mat-form-field>
+                    <mat-label>First Name</mat-label>
+                    <input placeholder="First Name.." matInput formControlName="firstName">
+                </mat-form-field>
+    
+                <mat-form-field>
+                    <mat-label>Last Name</mat-label>
+                    <input placeholder="Last Name.." matInput formControlName="lastName">
+                </mat-form-field>
+    
+                <label>Gender </label>
+                <mat-radio-group formControlName="gender">
+                    <mat-radio-button value="Female">Female</mat-radio-button>
+                    <mat-radio-button value="Male">Male</mat-radio-button>
+                </mat-radio-group>
+    
+                <mat-form-field>
+                    <mat-label>Date of Birth</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="dob">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+    
+                <mat-form-field>
+                    <mat-label>Address</mat-label>
+                    <textarea matInput formControlName="address"></textarea>
+                </mat-form-field>
+    
+                <mat-form-field>
+                    <mat-label>Country</mat-label>
+                    <input placeholder="Pick one" [formControl]="autoCompleteControl" matInput
+                        [matAutocomplete]="auto">
+                    <mat-autocomplete #auto="matAutocomplete">
+                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                            {{option}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+                <button mat-raised-button type="submit">Submit</button>
+                <button mat-raised-button type="reset" >Reset</button>
+            </form>
+        </div>
+    </mat-card-content>
+</mat-card>
